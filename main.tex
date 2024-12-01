@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage[ngerman]{babel}
+\usepackage{hyperref}
+\usepackage{tabularx}
+
+\title{Abgabe 1 für Computergestützte Methoden}
+\author{Gruppe 24, Anna Hofmann und Madita Klusekemper}
+\date{11. November 2024}
+
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+\newpage
+\section{Der zentrale Grenzwertsatz}
+Der zentrale Grenzwertsatz (ZGS) ist ein fundamentales Resultat der Wahrscheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch verteilter ($i.i.d.$) Zufallsvariablen (ZV) beschreibt. Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch handhabbar ist.
+
+\subsection{Aussage}
+Sei $X_1,X_2,...X_n$ eine Folge von $i.i.d$ ZV mit dem Erwartungswert $\mu=E(X_i)$ und der Varianz $o^2=Var(X_i)$, wobei $0<o^2<\infty$ gelte. Dann konvergiert die standardisierte Summe $Z_n$ dieser ZV für $n\to\infty$ in Verteilung gegen eine Standardnormalverteilung:\footnote{Der zentrale Grenzwertsatz hat verschiedene Verallgemeinerungen. Eine davon ist der \textbf{Lindeberg-Feller-Zentrale-Grenzwertsatz}[\cite{citation-key}, Seite 328], der schwächere Bedingungen an
+die Unabhängigkeit und die identische Verteilung der ZV stellt.}
+
+\begin{equation}
+  \label{eq:standartisierte_summe}  
+   Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma\sqrt{n} } \to^d N(0,1)
+\end{equation}
+Das bedeutet, dass für große $n$ die Summe der ZV näherungsweise normalverteilt
+ist mit dem Erwartungswert $n\mu$ und Varianz $n\sigma ^2$: 
+\begin{equation}
+    \label{SummeZW}
+    \sum_{i=1}^n X_i \sim N(n\mu,n\sigma^2).
+\end{equation}
+
+\subsection{Erklärung der Standardisierung}
+Um die Summe der ZV in einer Standardnormalverteilung zu transformieren, subtrahirt man den Erwartungswert $n\mu$ und teilt durch die Standardabweichung $\sigma\sqrt{n}$. Dies führt zu der obrigen Formel \eqref{eq:standartisierte_summe}. Die Darstellung \eqref{SummeZW} ist für $n\to\infty$ nicht wohldefiniert. 
+
+
+\subsection{Anwendung}
+Der ZGS wir in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+\begin{itemize}
+\item Wir betrachten die Augensumme zweier Würfel. Werfen wir die Würfel also zweimal, können Augensummen zwischen zwei (also zweimal die eins) und zwölf (zweimal die sechs) entstehen. Es entstehen also $36$ mögliche Würfelkonstellationen. Die sieben kann man durch sechs verschiedene Varianten erhlaten und kommt somit am häufigsten vor. Bei der zugehöhrigen Verteilung kann man somit die Glockenkurve der Normalverteilung erahnen. Umso häufiger man nun würfelt desto deutlicher kann man die normalverteilung Erkennen. 
+    \item Angenommen, wir würfeln so lange, bis wir $20$ Mal eine Sechs gewürfelt haben. Was ist die Wahrscheinlichkeit, dass wir dies mit $100$ Versuchen schaffen?
+    Wir stellen fest \cite{Statistik}:
+    \begin{itemize}
+        \item die Anzahl benötigter Würfe ist $X_1+X_2+...+X_2_0$, wobei $X_i \sim^i^i^d G(1/6)$
+        \item hierbei ist $E(X_i)=6$ und $Var(X_i)=30$
+        \item gemäß des ZGWS ist also: 
+        $P(X_1+...+X_2_0\leq100)=P(X_1+...+X_2_0-20*6<100-20*6=P(\frac{X_1+...+X_2_0 -120}{\sqrt{600}}\leq\frac{-20}{\sqrt{600}})\approx\phi(\frac{-20}{\sqrt{600}})\approx 0.21$
+        
+    \end{itemize}
+\end{itemize}
+
+\section{Bearbeitung zur Aufgabe 1}
+\begin{itemize}
+    \item Die höchste mittlere Temperatur beträgt 83 Grad Fahrenheit, also ca 28,33 Grad Celsius. Dazu haben wir unseren Datensatz in eine Tabellenkalkulation eingefügt und den Text in Spalten geteilt. Somit hatten wir die mittlere Temperatur in Spalte J und konnten mit dem Befehl $=MAX(J2:J365)$ die höchste mittlere Temperatur bestimmen.
+    \item Datenbank-Schemata (Ich kriege die Tabelle nicht so formatiert, dass sie auf die seite passt:( )
+
+ \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+        \hline 
+            Station&Date&DayofYear&DayofWeek&Month&Precip.&Windspeed&min-&average-&max-Temp.&Count\\
+            Ave and E &1.1.23&1&1&1&0&10.06&42&50&56&68\\
+        \end{tabular}
+        \caption{1.Normalform}
+        \label{1. Normalform}
+    \end{table}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+        Station&Date&Precipitation&Windspeed&min-&average-&max-Temp.\\
+         Ave&1.1.2023&0&10.06&42&50&56
+    \end{tabular}
+    \caption{2.Normalform: Wetterdaten (Station,Datum) }
+    \label{tab:my_label}
+\end{table}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+         Date&Day of Year&Day of Week&Month of Year  \\
+         01.01.2023&1&1&1 
+    \end{tabular}
+    \caption{2.Normalform: Datumsinformationen}
+    \label{tab:my_label}
+\end{table}
+\newpage
+\item Umsetzung der Daten in SQL
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{SchemaSQL.jpg}
+    \caption{SQL Schema}
+    \label{fig:enter-label}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{FormulierungSQLAbfrage.jpg}
+    \caption{SQL Abfrage}
+    \label{fig:enter-label}
+\end{figure}
+
+\end{itemize}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
